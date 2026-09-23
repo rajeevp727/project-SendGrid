@@ -6,19 +6,31 @@ on:
     paths:
       - 'backend/**'
       - 'shared/**'
+      - 'workers/**'
+      - 'sdk/dotnet/**'
   pull_request:
     branches: [main]
     paths:
       - 'backend/**'
       - 'shared/**'
+      - 'workers/**'
+      - 'sdk/dotnet/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
-      - run: dotnet build backend/Communication.Api/Communication.Api.csproj --configuration Release
-      - run: dotnet build workers/Communication.Worker/Communication.Worker.csproj --configuration Release
+          dotnet-version: '10.0.x'
+
+      - run: dotnet restore backend/Communication.Api/Communication.Api.csproj
+      - run: dotnet build backend/Communication.Api/Communication.Api.csproj --configuration Release --no-restore
+
+      - run: dotnet restore workers/Communication.Worker/Communication.Worker.csproj
+      - run: dotnet build workers/Communication.Worker/Communication.Worker.csproj --configuration Release --no-restore
+
+      - run: dotnet restore sdk/dotnet/ProjectSendGrid.Client/ProjectSendGrid.Client.csproj
+      - run: dotnet build sdk/dotnet/ProjectSendGrid.Client/ProjectSendGrid.Client.csproj --configuration Release --no-restore
