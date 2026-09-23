@@ -9,4 +9,7 @@
     <Authors>Project SendGrid</Authors>
     <Description>Typed .NET client for the Project SendGrid communications API.</Description>
   </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 </Project>
