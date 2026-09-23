@@ -1,51 +1,41 @@
-# Deployment
+# TriSend Deployment
 
 ## Azure resources
 
-### Frontend
-Azure Static Web Apps hosts the React dashboard.
+- Azure App Service hosts the .NET 10 TriSend API.
+- Azure Functions isolated .NET 10 hosts the Service Bus worker.
+- Azure Service Bus provides durable asynchronous message delivery.
+- Azure SQL Database stores tenants and messages.
+- Azure Key Vault stores provider secrets and application secrets.
+- Application Insights provides telemetry.
 
-### API
-Azure App Service hosts the .NET 8 API.
+## Required API settings
 
-### Queue
-Azure Service Bus provides durable asynchronous message delivery.
+- `Mvp__ApiKey`
+- `Mvp__TenantId`
+- `ConnectionStrings__Sql`
+- `ServiceBus__FullyQualifiedNamespace`
+- `ServiceBus__QueueName`
 
-### Worker
-Azure Functions with Service Bus triggers is the preferred production worker host.
+## Required Function settings
 
-### Data
-Azure SQL Database stores tenants, messages, events and usage.
+- `FUNCTIONS_WORKER_RUNTIME=dotnet-isolated`
+- `ServiceBusQueueName=trisend-messages`
+- `ServiceBusConnection__fullyQualifiedNamespace=<namespace>.servicebus.windows.net`
+- `ConnectionStrings__Sql=<SQL connection string using Entra authentication>`
 
-### Secrets
-Azure Key Vault stores provider API keys, webhook secrets and database credentials where needed.
+The Function's managed identity needs Service Bus Data Receiver and SQL database permissions.
 
-### Observability
-Application Insights and Azure Monitor provide logs, metrics and traces.
-
-## GitHub secrets / configuration
-
-Do not commit values.
-
-Expected deployment configuration includes:
-
-- Azure Static Web Apps deployment token or OIDC
-- Azure App Service deployment identity/OIDC
-- Azure resource names
-- Service Bus namespace
-- Key Vault name
+The API's managed identity needs Service Bus Data Sender and SQL database permissions.
 
 ## Deployment order
 
-1. Create Azure resource group.
-2. Create SQL database.
-3. Create Service Bus namespace and queue.
-4. Create Key Vault.
-5. Create App Service and Function App.
-6. Create Static Web App.
-7. Configure application settings and managed identities.
-8. Run database schema/migrations.
-9. Configure provider credentials.
-10. Deploy backend, worker and frontend.
-11. Configure provider webhooks.
-12. Execute smoke tests.
+1. Create Azure resources.
+2. Create the SQL schema from `infrastructure/sql/001_initial_schema.sql`.
+3. Configure managed identities/RBAC.
+4. Configure Key Vault and application settings.
+5. Deploy the API.
+6. Deploy the Function worker.
+7. Run the smoke test.
+
+See [Smoke Test](SMOKE-TEST.md) for the end-to-end verification.
