@@ -1,22 +1,12 @@
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = FunctionsApplication.CreateBuilder(args);
 
-builder.Services.AddHostedService<MessageWorker>();
+builder.ConfigureFunctionsWebApplication();
 
-await builder.Build().RunAsync();
+builder.Services.AddApplicationInsightsTelemetryWorkerService();
+builder.Services.ConfigureFunctionsApplicationInsights();
 
-public sealed class MessageWorker(ILogger<MessageWorker> logger) : BackgroundService
-{
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        logger.LogInformation("Communication worker started.");
-
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            // Azure Service Bus consumption will be added here.
-            await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
-        }
-    }
-}
+builder.Build().Run();
