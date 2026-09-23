@@ -1,3 +1,5 @@
+using Communication.Api.Security;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -9,6 +11,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseMiddleware<MvpApiKeyMiddleware>();
 
 app.MapGet("/health", () => Results.Ok(new
 {
