@@ -1,6 +1,6 @@
 export type MessageChannel = "sms" | "whatsapp" | "email";
 
-export interface ProjectSendGridOptions {
+export interface TriSendOptions {
   baseUrl: string;
   apiKey: string;
 }
@@ -18,8 +18,8 @@ export interface SendMessageResponse {
   status: string;
 }
 
-export class ProjectSendGridClient {
-  constructor(private readonly options: ProjectSendGridOptions) {}
+export class TriSendClient {
+  constructor(private readonly options: TriSendOptions) {}
 
   sendSms(recipient: string, body: string, idempotencyKey?: string) {
     return this.send({
@@ -71,7 +71,7 @@ export class ProjectSendGridClient {
 
     if (!response.ok) {
       throw new Error(
-        `Project SendGrid request failed: ${response.status}`,
+        `TriSend request failed: ${response.status}`,
       );
     }
 

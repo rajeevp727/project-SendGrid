@@ -1,18 +1,16 @@
-# Project SendGrid
+# TriSend
 
 An API-first communications platform for **SMS, WhatsApp and email**.
 
-Other applications integrate with Project SendGrid once instead of integrating separately with messaging vendors.
+Other applications integrate with TriSend once instead of integrating separately with messaging vendors.
 
-## Example
+## MVP flow
 
-```csharp
-await messaging.SendSmsAsync("+919876543210", "Your OTP is 123456");
-await messaging.SendWhatsAppAsync("+919876543210", "Your order is confirmed.");
-await messaging.SendEmailAsync("customer@example.com", "Order confirmed", "Your order is confirmed.");
+```
+Your App -> TriSend API -> Azure SQL -> Azure Service Bus -> Azure Function -> Provider -> Status
 ```
 
-Any language can consume the REST API with:
+### Send a message
 
 ```http
 POST /v1/messages
@@ -20,18 +18,28 @@ Authorization: Bearer <API_KEY>
 Content-Type: application/json
 ```
 
-## MVP architecture
-
-```text
-Your App -> Project SendGrid API -> Service Bus -> Worker -> SMS / WhatsApp / Email provider
+```json
+{
+  "channel": "sms",
+  "recipient": "+919876543210",
+  "body": "Your OTP is 123456"
+}
 ```
+
+The API returns HTTP 202 with a queued message ID. The Function worker consumes the queue and updates the message status.
+
+## Supported channels
+
+- SMS
+- WhatsApp
+- Email
+
+The MVP ships with a development provider so the complete queue/worker/status path can be verified before adding production provider credentials.
 
 ## Documentation
 
-- [Consumption guide](docs/CONSUMPTION.md)
-- [MVP](docs/MVP.md)
 - [API](docs/API.md)
-- [SDK strategy](docs/SDK.md)
+- [MVP](docs/MVP.md)
 - [Architecture](docs/architecture.md)
 - [Deployment](docs/DEPLOYMENT.md)
 - [Local development](docs/LOCAL-DEVELOPMENT.md)

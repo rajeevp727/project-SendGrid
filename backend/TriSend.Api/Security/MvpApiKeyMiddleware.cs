@@ -1,4 +1,4 @@
-namespace Communication.Api.Security;
+namespace TriSend.Api.Security;
 
 public sealed class MvpApiKeyMiddleware(RequestDelegate next, IConfiguration configuration)
 {

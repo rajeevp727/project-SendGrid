@@ -1,8 +1,8 @@
 using System.Net.Http.Json;
 
-namespace ProjectSendGrid.Client;
+namespace TriSend.Client;
 
-public sealed class ProjectSendGridClient(HttpClient httpClient)
+public sealed class TriSendClient(HttpClient httpClient)
 {
     public async Task<SendMessageResponse> SendSmsAsync(
         string recipient,
@@ -40,7 +40,7 @@ public sealed class ProjectSendGridClient(HttpClient httpClient)
 
         return await response.Content.ReadFromJsonAsync<SendMessageResponse>(
             cancellationToken: cancellationToken)
-            ?? throw new InvalidOperationException("Project SendGrid returned an empty response.");
+            ?? throw new InvalidOperationException("TriSend returned an empty response.");
     }
 }
 

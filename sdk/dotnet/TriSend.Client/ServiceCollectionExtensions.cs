@@ -1,9 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace ProjectSendGrid.Client;
+namespace TriSend.Client;
 
-public sealed class ProjectSendGridOptions
+public sealed class TriSendOptions
 {
     public string BaseUrl { get; set; } = "https://api.your-domain.com/";
     public string ApiKey { get; set; } = string.Empty;
@@ -11,16 +11,16 @@ public sealed class ProjectSendGridOptions
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddProjectSendGrid(
+    public static IServiceCollection AddTriSend(
         this IServiceCollection services,
-        Action<ProjectSendGridOptions> configure)
+        Action<TriSendOptions> configure)
     {
         services.Configure(configure);
 
-        services.AddHttpClient<ProjectSendGridClient>((serviceProvider, client) =>
+        services.AddHttpClient<TriSendClient>((serviceProvider, client) =>
         {
             var options = serviceProvider
-                .GetRequiredService<IOptions<ProjectSendGridOptions>>()
+                .GetRequiredService<IOptions<TriSendOptions>>()
                 .Value;
 
             client.BaseAddress = new Uri(options.BaseUrl);

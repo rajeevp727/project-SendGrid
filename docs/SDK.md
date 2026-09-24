@@ -10,9 +10,9 @@ The REST API is the canonical interface. SDKs are thin convenience wrappers.
 
 Package:
 
-`ProjectSendGrid.Client`
+`TriSend.Client`
 
-Target: .NET 8.
+Target: .NET 10.
 
 Usage:
 

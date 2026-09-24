@@ -1,21 +1,21 @@
-# ProjectSendGrid.Client
+# TriSend.Client
 
-Typed .NET 8 client for consuming Project SendGrid.
+Typed .NET 10 client for consuming TriSend.
 
 ## Register
 
 ```csharp
-builder.Services.AddProjectSendGrid(options =>
+builder.Services.AddTriSend(options =>
 {
-    options.BaseUrl = configuration["ProjectSendGrid:BaseUrl"]!;
-    options.ApiKey = configuration["ProjectSendGrid:ApiKey"]!;
+    options.BaseUrl = configuration["TriSend:BaseUrl"]!;
+    options.ApiKey = configuration["TriSend:ApiKey"]!;
 });
 ```
 
 ## Inject
 
 ```csharp
-public class OrderService(ProjectSendGridClient messaging)
+public class OrderService(TriSendClient messaging)
 {
     public Task SendOrderEmailAsync()
     {
