@@ -1,8 +1,8 @@
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
-using Communication.Contracts;
+using TriSend.Contracts;
 
-namespace Communication.Api.Messaging;
+namespace TriSend.Api.Messaging;
 
 public sealed class ServiceBusMessagePublisher(
     ServiceBusClient client,

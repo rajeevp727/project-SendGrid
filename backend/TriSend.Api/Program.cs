@@ -1,8 +1,8 @@
 using Azure.Identity;
 using Azure.Messaging.ServiceBus;
-using Communication.Api.Data;
-using Communication.Api.Messaging;
-using Communication.Api.Security;
+using TriSend.Api.Data;
+using TriSend.Api.Messaging;
+using TriSend.Api.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 

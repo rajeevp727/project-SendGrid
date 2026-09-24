@@ -4,10 +4,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>ProjectSendGrid.Client</PackageId>
+    <PackageId>TriSend.Client</PackageId>
     <Version>0.1.0</Version>
-    <Authors>Project SendGrid</Authors>
-    <Description>Typed .NET client for the Project SendGrid communications API.</Description>
+    <Authors>TriSend</Authors>
+    <Description>Typed .NET client for the TriSend communications API.</Description>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

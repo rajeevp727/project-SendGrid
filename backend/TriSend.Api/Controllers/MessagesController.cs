@@ -1,9 +1,9 @@
-using Communication.Api.Data;
-using Communication.Api.Messaging;
-using Communication.Contracts;
+using TriSend.Api.Data;
+using TriSend.Api.Messaging;
+using TriSend.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Communication.Api.Controllers;
+namespace TriSend.Api.Controllers;
 
 [ApiController]
 [Route("v1/messages")]

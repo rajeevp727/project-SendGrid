@@ -1,4 +1,4 @@
-namespace Communication.Contracts;
+namespace TriSend.Contracts;
 
 public enum MessageChannel
 {

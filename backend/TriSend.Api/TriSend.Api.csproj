@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\\..\\shared\\Communication.Contracts\\Communication.Contracts.csproj" />
+    <ProjectReference Include="..\\..\\shared\\TriSend.Contracts\\TriSend.Contracts.csproj" />
     <PackageReference Include="Azure.Identity" Version="1.17.0" />
     <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.20.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />

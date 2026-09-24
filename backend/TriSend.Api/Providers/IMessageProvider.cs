@@ -1,4 +1,4 @@
-namespace Communication.Api.Providers;
+namespace TriSend.Api.Providers;
 
 public interface IMessageProvider
 {

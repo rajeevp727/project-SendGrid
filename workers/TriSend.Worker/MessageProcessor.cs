@@ -1,11 +1,11 @@
 using System.Text.Json;
-using Communication.Contracts;
+using TriSend.Contracts;
 using Microsoft.Data.SqlClient;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Communication.Worker;
+namespace TriSend.Worker;
 
 public sealed class MessageProcessor(
     IConfiguration configuration,

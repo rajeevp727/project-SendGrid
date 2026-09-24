@@ -1,6 +1,6 @@
 using Microsoft.Data.SqlClient;
 
-namespace Communication.Api.Data;
+namespace TriSend.Api.Data;
 
 public sealed record MessageRecord(
     Guid Id,
