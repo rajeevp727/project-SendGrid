@@ -22,6 +22,9 @@ concurrency:
 env:
   AZURE_WEBAPP_NAME: app-trisend-api-rj
   AZURE_FUNCTIONAPP_NAME: func-trisend-worker-rj
+  AZURE_CLIENT_ID: 537e30e3-7d6b-4e0f-9d83-c3bee5741
+  AZURE_TENANT_ID: 90795233-bba4-4cf9-8340-be7c87d0786e
+  AZURE_SUBSCRIPTION_ID: e410bcc1-62a7-4225-8341-a8b372c38e68
 
 jobs:
   deploy:
@@ -45,9 +48,9 @@ jobs:
       - name: Azure login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy API
         uses: azure/webapps-deploy@v3
